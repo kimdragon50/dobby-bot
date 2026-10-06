@@ -1,0 +1,46 @@
+# Jira Ticket Domain Configuration
+# Reaction-based Jira ticket creation settings
+
+# Default story points for tickets created via emoji reaction
+default_story_points: 1
+
+# Markers applied to every ticket 도비 auto-creates (task + subtasks), so auto-created
+# work is distinguishable from hand-made tickets.
+#   source_label         -> fixed marker
+#   trigger_label_prefix -> prefix + reaction name (e.g. trigger:op_cloud)
+source_label: "source:dobby"
+trigger_label_prefix: "trigger:"
+
+# Initiative labels for normal (non-KPI) tickets. KPI mode uses kpi_mode.labels instead.
+default_labels:
+  - "initiative:op"
+  - "role:devops"
+
+# Allowed Slack channels (leave empty to allow all)
+allowed_channels: []
+  # - "C0123456789"  # e.g. #team-devops
+
+# KPI mode: when the thread contains the keyword below, the ticket is created under the
+# most relevant epic of the KPI initiatives instead of the reaction's default initiative.
+# 이니셔티브(KPI) -> 에픽(수행 항목) -> 태스크(생성되는 티켓) -> 서브태스크
+kpi_mode:
+  keyword: "#KPI"
+  initiative_keys: []
+    # - "PROJ-100"  # e.g. [KPI-1] Cloud cost reporting & optimization
+  # Labels applied to KPI tickets (replaces the default label set)
+  labels:
+    - "initiative:kpi"
+    - "role:devops"
+
+# Reaction to Jira project mapping
+reaction_mapping:
+  op_cloud:
+    reaction: "op_cloud"
+    project_key: "PROJ"
+    parent_key: "PROJ-1"  # default initiative / parent issue
+    issue_type: "Task"
+  # op_portal:
+  #   reaction: "op_portal"
+  #   project_key: "PROJ"
+  #   parent_key: "PROJ-2"
+  #   issue_type: "Story"

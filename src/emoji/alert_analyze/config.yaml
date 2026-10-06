@@ -1,0 +1,10 @@
+# Alert Analyze Handler Configuration
+# Triggered by :op_analyze: emoji reaction on any Grafana alert Slack message
+
+reaction: op_analyze
+
+# Channel filter — empty means all channels are allowed (v1: no filter)
+allowed_channels: []
+
+# Maximum alert instances to analyze per message (controls latency)
+max_instances: 3
